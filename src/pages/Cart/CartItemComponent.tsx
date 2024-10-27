@@ -48,7 +48,7 @@ const CartItemComponent = ({ item }: { item: CartItem }) => {
     <div key={item.product.id} className="flex gap-2 p-2 border-b">
       <img src={item.product.image} alt={item.product.title} className="w-16 h-16 object-contain" />
       <div className="flex-1 flex flex-col justify-center gap-2">
-        <div className="font-semibold line-clamp-2 h-[44px]">{item.product.title}</div>
+        <div className="font-semibold line-clamp-2 h-[44px] text-sm sm:text-md">{item.product.title}</div>
         <div className="flex gap-2 items-start">
           <Popover open={isUpdating} onOpenChange={setIsUpdating}>
             <PopoverTrigger onClick={() => setIsUpdating(true)}>
@@ -77,7 +77,7 @@ const CartItemComponent = ({ item }: { item: CartItem }) => {
           </div>
         </div>
       </div>
-      <div className="font-semibold">
+      <div className="font-semibold text-sm sm:text-md">
         ${item.product.price} <span className="text-sm font-normal text-muted-foreground">x{item.quantity}</span>
       </div>
     </div>

@@ -26,7 +26,7 @@ function ProductItem({ product }: { product: Product }) {
   };
 
   return (
-    <div key={product.id} className="p-4 border rounded-md">
+    <div key={product.id} className="p-2 md:p-4 border rounded-md">
       <div className="aspect-square place-content-center flex mb-2 hover:scale-105 transition-all ">
         <img src={product.image} alt={product.title} className="object-contain" />
       </div>
@@ -48,7 +48,7 @@ function ProductItem({ product }: { product: Product }) {
           </div>
         </div>
         <div className="flex justify-between items-center">
-          <div className="font-bold text-right leading-none">${product.price}</div>
+          <div className="font-bold text-right leading-none text-sm sm:text-md">${product.price}</div>
           <Button variant="outline" size="sm" className="shadow-none !p-2 h-7" onClick={handleAddToCart}>
             Add To Cart
           </Button>
