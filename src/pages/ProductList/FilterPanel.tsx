@@ -64,7 +64,7 @@ function FilterPanel() {
               ))}
             </SelectContent>
           </Select>
-          <label className="block text-sm font-medium text-gray-700">Price</label>
+          <label className="block text-sm font-medium text-gray-700 mt-2">Price</label>
           <div>
             <span>${priceRange[0]}</span>
             <span className="float-right">${priceRange[1]}</span>
@@ -78,7 +78,7 @@ function FilterPanel() {
             onValueChange={(v) => setInnerFilers({ ...innerFilters, priceRange: v })}
           />
 
-          <label className="block text-sm font-medium text-gray-700">Star</label>
+          <label className="block text-sm font-medium text-gray-700 mt-2">Star</label>
           <div className="flex gap-2" onMouseLeave={() => setHoveringStar(0)}>
             {Array.from({ length: 5 }).map((_, index) => (
               <span title={`${index + 1} star`}>
@@ -95,7 +95,7 @@ function FilterPanel() {
               </span>
             ))}
           </div>
-          <Button className="mt-3" size="sm" onClick={() => onFilterChanged(innerFilters)}>
+          <Button className="mt-5" size="sm" onClick={() => onFilterChanged(innerFilters)}>
             Filter
           </Button>
         </div>

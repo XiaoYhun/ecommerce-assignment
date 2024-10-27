@@ -7,6 +7,7 @@ import ProductItem from "./ProductItem";
 import { Button } from "@/components/ui/button";
 import SortSelect from "./SortSelect";
 import { ESortBy } from "@/types";
+import MobileFilterPanel from "./MobileFilterPanel";
 
 type TFilter = {
   search: string;
@@ -87,11 +88,14 @@ export default function ProductList() {
       <ProductListContext.Provider
         value={{ filter: filters, sort, onFilterChanged: setFilters, onSortChanged: setSort }}
       >
-        <div className="w-1/4">
+        <div className="hidden sm:block sm:w-1/4">
           <FilterPanel />
         </div>
-        <div className="w-3/4">
-          <div className="flex mb-3 items-center justify-between">
+        <div className="sm:w-3/4">
+          <div className="flex mb-3 items-center justify-between w-full">
+            <div className="block sm:hidden">
+              <MobileFilterPanel />
+            </div>
             {hasFilters && (
               <Button variant="outline" size="sm" onClick={() => setFilters(initialFilters)}>
                 Clear All Filters <X size={14} />
@@ -102,13 +106,13 @@ export default function ProductList() {
             </div>
           </div>
           {isLoading ? (
-            <div className="grid sm:grid-cols-2 md:grid-cols-4 gap-2">
+            <div className="grid grid-cols-2 lg:grid-cols-4 md:grid-cols-3 gap-2">
               <Skeletons />
             </div>
           ) : !filteredData.length ? (
             <div className="h-32 flex items-center justify-center">No product found.</div>
           ) : (
-            <div className="grid sm:grid-cols-2 md:grid-cols-4 gap-2">
+            <div className="grid grid-cols-2 lg:grid-cols-4 md:grid-cols-3 gap-2">
               {filteredData.map((product) => (
                 <ProductItem key={product.id} product={product} />
               ))}

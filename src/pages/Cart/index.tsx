@@ -15,7 +15,7 @@ export default function Cart() {
         <ArrowLeft size={16} /> Back to Product list
       </Link>
       <div className="mx-auto">
-        <div className="text-xl font-bold text-center mb-4">Your Cart Summary</div>
+        <div className="text-xl font-bold text-center mb-4 mt-2">Your Cart Summary</div>
         {items.length === 0 ? (
           <div className="h-32 flex items-center justify-center text-2xl font-bold text-black/30">
             Your cart is empty.
