@@ -47,17 +47,17 @@ export default function ProductList() {
 
   const filteredData = useMemo(() => {
     if (!data) return [];
-    let newData = hasFilters
+    const newData = hasFilters
       ? data.filter((product) => {
-          const matchesSearch = !!filters.search
+          const matchesSearch = filters.search
             ? product.title.toLowerCase().includes(filters.search.toLowerCase())
             : true;
-          const matchesCategory = !!filters.category ? product.category === filters.category : true;
+          const matchesCategory = filters.category ? product.category === filters.category : true;
           const matchesPriceRange =
             filters.priceRange[0] !== 0 || filters.priceRange[1] !== 1000
               ? product.price >= filters.priceRange[0] && product.price <= filters.priceRange[1]
               : true;
-          const matchesStar = !!filters.star ? product.rating.rate >= filters.star : true;
+          const matchesStar = filters.star ? product.rating.rate >= filters.star : true;
 
           return matchesSearch && matchesCategory && matchesPriceRange && matchesStar;
         })

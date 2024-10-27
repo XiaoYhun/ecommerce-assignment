@@ -1,6 +1,6 @@
 import useProducts from "@/hooks/api/useProducts";
 import ProductItem from "../ProductList/ProductItem";
-import { useCallback, useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { Product } from "@/types";
 import { FixedSizeGrid } from "react-window";
 import AutoSizer from "react-virtualized-auto-sizer";
@@ -23,7 +23,15 @@ function Showcase() {
     }, 1000);
   }, [loading, baseData]);
 
-  const Cell = ({ columnIndex, rowIndex, style }: any) => {
+  const Cell = ({
+    columnIndex,
+    rowIndex,
+    style,
+  }: {
+    columnIndex: number;
+    rowIndex: number;
+    style: React.CSSProperties;
+  }) => {
     const index = rowIndex * 4 + columnIndex;
     const product = data?.[index];
     return <div style={{ ...style, padding: "6px" }}>{product && <ProductItem product={product} />}</div>;
