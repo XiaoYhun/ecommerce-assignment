@@ -1,10 +1,10 @@
 import { Button } from "@/components/ui/button";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { MouseEventHandler, useContext, useState } from "react";
+import React, { MouseEventHandler, useContext, useState } from "react";
 import { ProductListContext } from ".";
 import { ESortBy } from "@/types";
 
-export default function SortSelect() {
+function SortSelect() {
   const { sort, onSortChanged } = useContext(ProductListContext);
   const [key, setKey] = useState(0);
 
@@ -37,3 +37,5 @@ export default function SortSelect() {
     </Select>
   );
 }
+
+export default React.memo(SortSelect);

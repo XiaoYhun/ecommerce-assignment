@@ -1,11 +1,11 @@
 import { Button } from "@/components/ui/button";
 import { Filter } from "lucide-react";
 import FilterPanel from "./FilterPanel";
-import { useContext, useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { ProductListContext } from ".";
 import { Drawer, DrawerContent, DrawerTrigger } from "@/components/ui/drawer";
 
-export default function MobileFilterPanel() {
+function MobileFilterPanel() {
   const { filter } = useContext(ProductListContext);
   const [isOpenDrawer, setIsOpenDrawer] = useState(false);
 
@@ -28,3 +28,5 @@ export default function MobileFilterPanel() {
     </div>
   );
 }
+
+export default React.memo(MobileFilterPanel);
