@@ -1,4 +1,3 @@
-import { on } from "events";
 import { create } from "zustand";
 
 type Confirmation = {

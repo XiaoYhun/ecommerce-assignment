@@ -5,7 +5,7 @@ import { useToast } from "@/hooks/use-toast";
 import { cn } from "@/lib/utils";
 import { Product } from "@/types";
 import { Star } from "lucide-react";
-import React, { ErrorInfo } from "react";
+import React from "react";
 import { Link } from "react-router-dom";
 
 function ProductItem({ product }: { product: Product }) {
@@ -13,18 +13,16 @@ function ProductItem({ product }: { product: Product }) {
   const { toast } = useToast();
 
   const handleAddToCart = () => {
-    try {
-      addItem(product);
-      toast({
-        title: "Added item to cart",
-        variant: "success",
-        action: (
-          <ToastAction asChild altText="View cart" className="bg-white/10">
-            <Link to="/cart">View Cart</Link>
-          </ToastAction>
-        ),
-      });
-    } catch (e) {}
+    addItem(product);
+    toast({
+      title: "Added item to cart",
+      variant: "success",
+      action: (
+        <ToastAction asChild altText="View cart" className="bg-white/10">
+          <Link to="/cart">View Cart</Link>
+        </ToastAction>
+      ),
+    });
   };
 
   return (
