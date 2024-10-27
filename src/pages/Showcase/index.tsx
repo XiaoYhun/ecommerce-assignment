@@ -43,7 +43,7 @@ function Showcase() {
   }, [baseData]);
 
   useEffect(() => {
-    window.addEventListener("resize", () => {
+    const updateColumnCount = () => {
       if (window.innerWidth < 640) {
         setColumnCount(2);
       } else if (window.innerWidth < 768) {
@@ -51,7 +51,9 @@ function Showcase() {
       } else {
         setColumnCount(4);
       }
-    });
+    };
+    updateColumnCount();
+    window.addEventListener("resize", updateColumnCount);
     return () => window.removeEventListener("resize", () => {});
   }, []);
 

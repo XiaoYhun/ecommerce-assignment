@@ -91,7 +91,7 @@ export default function ProductList() {
         <div className="hidden sm:block sm:w-1/4">
           <FilterPanel />
         </div>
-        <div className="sm:w-3/4">
+        <div className="w-full sm:w-3/4">
           <div className="flex mb-3 items-center justify-between w-full">
             <div className="block sm:hidden">
               <MobileFilterPanel />
