@@ -9,7 +9,8 @@ export const router = createBrowserRouter([
     children: [
       { index: true, path: "", element: <Navigate to="/products" replace /> },
       { path: "products", Component: lazy(() => import("@/pages/ProductList")) },
-      { path: "cart", Component: lazy(() => import("@/pages/Cart/index.tsx")) },
+      { path: "cart", Component: lazy(() => import("@/pages/Cart")) },
+      { path: "showcase", Component: lazy(() => import("@/pages/Showcase")) },
     ],
   },
 ]);

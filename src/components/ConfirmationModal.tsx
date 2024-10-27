@@ -12,10 +12,12 @@ function ConfirmationModal() {
           <DialogDescription>{message}</DialogDescription>
         </DialogHeader>
         <DialogFooter>
-          <Button onClick={onCancel}>Cancel</Button>
-          <Button onClick={onConfirm} variant="destructive">
-            {confirmText || "Confirm"}
-          </Button>
+          <div className="flex gap-2 w-full justify-center">
+            <Button onClick={onCancel}>Cancel</Button>
+            <Button onClick={onConfirm} variant="destructive">
+              {confirmText || "Confirm"}
+            </Button>
+          </div>
         </DialogFooter>
       </DialogContent>
     </Dialog>
