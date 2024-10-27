@@ -27,9 +27,9 @@ To get the project up and running on your local machine, follow these steps:
    Install the necessary packages for both the client and server:
 
    ```bash
-   npm start
+   npm install
    # or
-   yarn start
+   yarn
    ```
 
 4. **Run the Application:**
@@ -48,8 +48,7 @@ To get the project up and running on your local machine, follow these steps:
 
 The development of this ecommerce platform focused on creating a React-based frontend with key features that enhance user experience. The approach included:
 
-Key steps in the approach included:
-
+- Organized project folders and file naming conventions to facilitate future expansion and promote reusability.
 - Implemented `React Query` to efficiently fetch and manage API calls, enhancing data synchronization and caching.
 - Utilized `Context API` to share product filters seamlessly across components, ensuring consistent state management.
 - Optimized route components by incorporating `lazy loading` and memoizing child components with `React.memo` to improve performance.
