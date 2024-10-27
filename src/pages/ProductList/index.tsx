@@ -1,7 +1,7 @@
 import useProducts from "@/hooks/api/useProducts";
 import { X } from "lucide-react";
 import FilterPanel from "./FilterPanel";
-import { createContext, ReactNode, useMemo, useState } from "react";
+import { createContext, useMemo, useState } from "react";
 import Skeletons from "./Skeletons";
 import ProductItem from "./ProductItem";
 import { Button } from "@/components/ui/button";
@@ -43,23 +43,25 @@ export default function ProductList() {
   const [filters, setFilters] = useState(initialFilters);
   const [sort, setSort] = useState<ESortBy | undefined>();
 
+  const hasFilters = useMemo(() => JSON.stringify(filters) !== JSON.stringify(initialFilters), [filters]);
+
   const filteredData = useMemo(() => {
     if (!data) return [];
-    let newData = [...data];
-    if (filters.search) {
-      newData = newData.filter((product) => product.title.toLowerCase().includes(filters.search.toLowerCase()));
-    }
-    if (filters.category) {
-      newData = newData.filter((product) => product.category === filters.category);
-    }
-    if (filters.priceRange[0] !== 0 || filters.priceRange[1] !== 1000) {
-      newData = newData.filter(
-        (product) => product.price >= filters.priceRange[0] && product.price <= filters.priceRange[1]
-      );
-    }
-    if (filters.star) {
-      newData = newData.filter((product) => product.rating.rate >= filters.star);
-    }
+    let newData = hasFilters
+      ? data.filter((product) => {
+          const matchesSearch = !!filters.search
+            ? product.title.toLowerCase().includes(filters.search.toLowerCase())
+            : true;
+          const matchesCategory = !!filters.category ? product.category === filters.category : true;
+          const matchesPriceRange =
+            filters.priceRange[0] !== 0 || filters.priceRange[1] !== 1000
+              ? product.price >= filters.priceRange[0] && product.price <= filters.priceRange[1]
+              : true;
+          const matchesStar = !!filters.star ? product.rating.rate >= filters.star : true;
+
+          return matchesSearch && matchesCategory && matchesPriceRange && matchesStar;
+        })
+      : [...data];
 
     if (sort) {
       switch (sort) {
@@ -79,9 +81,7 @@ export default function ProductList() {
     }
 
     return newData;
-  }, [data, filters, sort]);
-
-  const hasFilters = JSON.stringify(filters) !== JSON.stringify(initialFilters);
+  }, [data, filters, sort, hasFilters]);
 
   return (
     <div className="w-full flex gap-4">
