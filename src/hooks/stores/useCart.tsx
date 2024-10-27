@@ -38,7 +38,7 @@ const useCart = create<CartStore>()(
       removeItem: (id) => {
         set((state) => {
           const newItems = state.items.filter((item) => item.id !== id);
-          return { ...state, items: newItems };
+          return { ...state, items: [...newItems] };
         });
       },
     }),

@@ -2,17 +2,28 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
 import useCart from "@/hooks/stores/useCart";
+import useConfirmation from "@/hooks/use-confirmation";
 import { CartItem } from "@/types";
 import React from "react";
 
 const CartItemComponent = ({ item }: { item: CartItem }) => {
   const [quantity, setQuantity] = React.useState(item.quantity);
   const [isUpdating, setIsUpdating] = React.useState(false);
+  const { confirmation } = useConfirmation();
 
   const { removeItem, updateQuantity } = useCart();
 
   const handleRemove = () => {
-    removeItem(item.id);
+    confirmation({
+      title: "Delete Item",
+      message: "Are you sure you want to delete this item from cart?",
+      confirmText: "Delete",
+      onConfirm: () => {
+        console.log("onConfirm");
+        removeItem(item.id);
+      },
+      onCancel: () => {},
+    });
   };
 
   const handleQuantityChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -37,11 +48,14 @@ const CartItemComponent = ({ item }: { item: CartItem }) => {
     <div key={item.product.id} className="flex gap-2 p-2 border-b">
       <img src={item.product.image} alt={item.product.title} className="w-16 h-16 object-contain" />
       <div className="flex-1 flex flex-col justify-center gap-2">
-        <div className="font-semibold">{item.product.title}</div>
+        <div className="font-semibold line-clamp-2 h-[44px]">{item.product.title}</div>
         <div className="flex gap-2 items-start">
           <Popover open={isUpdating} onOpenChange={setIsUpdating}>
             <PopoverTrigger onClick={() => setIsUpdating(true)}>
-              <div className="text-sm text-gray-500" onClick={() => setIsUpdating(true)}>
+              <div
+                className="text-sm text-gray-500 hover:text-gray-900 hover:font-semibold"
+                onClick={() => setIsUpdating(true)}
+              >
                 Quantity: {item.quantity}
               </div>
             </PopoverTrigger>
@@ -63,7 +77,9 @@ const CartItemComponent = ({ item }: { item: CartItem }) => {
           </div>
         </div>
       </div>
-      <div className="font-semibold">${item.product.price * item.quantity}</div>
+      <div className="font-semibold">
+        ${item.product.price} <span className="text-sm font-normal text-muted-foreground">x{item.quantity}</span>
+      </div>
     </div>
   );
 };

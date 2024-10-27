@@ -2,6 +2,7 @@ import { Outlet } from "react-router-dom";
 import Header from "@/components/Header";
 import { Suspense } from "react";
 import { Toaster } from "@/components/ui/toaster";
+import ConfirmationModal from "@/components/ConfirmationModal";
 function App() {
   return (
     <div className="">
@@ -12,6 +13,7 @@ function App() {
         </Suspense>
       </div>
       <Toaster />
+      <ConfirmationModal />
     </div>
   );
 }
